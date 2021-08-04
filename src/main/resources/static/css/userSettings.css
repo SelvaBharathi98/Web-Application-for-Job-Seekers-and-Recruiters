@@ -1,0 +1,57 @@
+.avatar {
+    vertical-align: middle;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+main{
+    margin-top: 5%;
+}
+.d-inline{
+    text-align: center;
+    padding-right: 2%;
+    padding-left: 2%;
+}
+#user-set{
+    width: 70%;
+}
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #c1dbf5;
+    border-radius: 8px;
+    margin-top: 2%;
+    #padding: 0px  0px;
+    padding-bottom: 0px;
+    border: 1px solid #bcbcbc;
+    width:100%;
+    height:400%;
+}
+.update{
+    width: 400px;
+}
+.divC{
+  height: 800px;
+  width: 900px;
+  background-color: DodgerBlues;
+}
+
+.head{
+ background: #567799;
+
+}
+.bgc{
+ background-color: #c1dbf5;
+ box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ border-radius: 8px;
+ border: 1px solid #bcbcbc;
+ padding: 20px  20px;
+}
+.navbar{
+    margin: 0;
+    #background-color: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+    background: #567799;
+    height: 80px;
+    text-align: center;
+    padding: 14px 16px;
+}

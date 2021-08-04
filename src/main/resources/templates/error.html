@@ -1,0 +1,38 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/css/error.css}" href="../static/css/error.css"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/font-awesome/5.7.2/css/all.css}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <title>Error Page</title>
+</head>
+<body>
+
+<div id="block_error">
+    <div>
+        <h2><i class="fas fa-bomb"></i> Error Oops you've have encountered an error</h2>
+        <p>
+            It apperrs that Either something went wrong or the page doesn't exist anymore..<br />
+            This website is temporarily unable to service your request as it has exceeded it’s resource limit. Please check back shortly.
+        </p>
+        <p>
+            If you are the owner of the account and are regularly seeing this error, please read more about it in our <a href="http://www.namecheap.com/support/knowledgebase/article.aspx/1128/103/what-happens-when-my-account-reaches-lve-limits-diagnosing-and-resolving">knowledgebase</a>.
+            If you have any questions, please contact our Technical Support department.
+        </p>
+    </div>
+</div>
+</body>
+</html>

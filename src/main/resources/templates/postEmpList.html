@@ -1,0 +1,94 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/font-awesome/5.7.2/css/all.css}" />
+
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"
+          media="all"  th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/searchForm.css"
+          media="all"  th:href="@{/css/searchForm.css}" />
+
+
+    <title>Main </title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/}"><i class="fas fa-wallet"></i>
+                    <span>JOB APPLICATION</span></a>
+            </div>
+
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="active"><i class="fas fa-user-secret"></i> RECRUITER</a></li>
+                    <li><a href="/index"><i class="fas fa-align-justify"></i> My List </a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/userSettings}"><i class="fas fa-users-cog"></i><span sec:authentication="principal.username">Settings</span></a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+
+        <div class="card-deck" th:each="p : ${posts}">
+            <div class="card">
+                <div class="card-body">
+                    <div style="display: inline-block; padding-right: 20px; vertical-align: bottom;">
+                        <img style=" width: 150px;" th:src="@{${'/uploads/'+ p.imgName}}" th:alt="icon">
+                    </div>
+                    <div style="display: inline-block; vertical-align: bottom;">
+                        <h5 class="card-title" th:text="${p.userFullName}">User Full Name</h5>
+                        <i><p class="card-text" th:text="${p.description}"></p></i><br>
+                        <p class="card-text up" th:text="${p.education}"></p>
+                        <p class="card-text up">
+                            <i class="fas fa-crosshairs"></i>    <small class="text-muted" th:text="${p.category}"></small>
+                            <i class="fas fa-map-marked-alt"></i>    <small class="text-muted" th:text="${p.location}"></small>
+                        </p>
+                        <p class="card-text up"><i class="fas fa-calendar-alt"></i> <small class="text-muted" th:text="${p.startDate}"></small></p>
+                        <p class="card-text up"><i class="fas fa-calendar-alt"></i> <small class="text-muted" th:text="${p.endDate}"></small></p><br>
+                        <p class="card-text up"> <i class="fas fa-money-bill-alt"></i> <span th:text="${p.price}"></span></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8"></div>
+                        <div class="col-md-2">
+                            <a type="button" th:href="@{|/write/email/${p.id}|}" class="btn btn-primary btn-sm"> Write E-mail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+<footer>
+    <p>Copyright © 2021 (19MX218 & 19MX221) </p>
+</footer>
+
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/main.js}"></script>
+
+</body>
+</html>

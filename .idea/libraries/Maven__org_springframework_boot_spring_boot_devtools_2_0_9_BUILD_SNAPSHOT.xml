@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.boot:spring-boot-devtools:2.0.9.BUILD-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/2.0.9.BUILD-SNAPSHOT/spring-boot-devtools-2.0.9.BUILD-20190403.133801-16.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/2.0.9.BUILD-SNAPSHOT/spring-boot-devtools-2.0.9.BUILD-20190403.133801-16-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-devtools/2.0.9.BUILD-SNAPSHOT/spring-boot-devtools-2.0.9.BUILD-20190403.133801-16-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+
+    <link rel="stylesheet" type="text/css" href="../../static/css/admin.css"
+          media="all"  th:href="@{/css/admin.css}" />
+
+    <title>Admin</title>
+</head>
+
+<body>
+
+<div class="sidenav">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">User</a>
+    <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false">Posts</a>
+    <a class="btn btn-danger">Settings</a>
+    <a class="btn btn-default">Statistics</a>
+</div>
+
+<div class="main">
+
+    <div class="tab-content">
+        <div class="tab-pane fade active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">Admin</div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <h3> here will list all users data and you can edit it!</h3>
+        </div>
+        <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+            <h3> here will list some post and you can search for them</h3>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</html>

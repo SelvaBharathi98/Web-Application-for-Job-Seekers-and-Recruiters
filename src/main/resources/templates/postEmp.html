@@ -1,0 +1,129 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/font-awesome/5.7.2/css/all.css}" />
+
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"
+          media="all"  th:href="@{/css/index.css}" />
+ <title>Main </title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/index_user}"><i class="fas fa-wallet"></i>
+                    <span>JOB APPLICATION</span></a>
+            </div>
+
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/index_user}"><i class="fas fa-address-card"></i> List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/userSettings}"><i class="fas fa-users-cog"></i>   <span sec:authentication="principal.username">User</span></a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="card-deck" >
+                <div class="card" id="postEmp-box">
+            <div align="center"><h1>Job Application</h1></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8"></div>
+            <div class="row"></div>
+            <form th:action="@{/create/post/emp}" th:object="${postdto}"  enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="img">Profile</label>
+                    <input id="img" type="file" name="file" />
+                </div>
+                <div class="form-group">
+                    <label for="userFullName" class="control-label">Full name  <i class="fas fa-user-tie"></i></label>
+                    <input id="userFullName" class="form-control" th:field="*{userFullName}" placeholder="Enter Your Full Name"/>
+                </div>
+                <div class="form-group">
+                    <label for="category" class="control-label">Category  <i class="fas fa-list"></i></label>
+                    <select class="form-control" id="category" name="category" th:field="*{category}">
+                        <option th:value="${'Developer'}">Developer</option>
+                        <option th:value="${'UI Designer'}">UI Designer</option>
+                        <option th:value="${'Network'}">Network</option>
+                        <option th:value="${'Project_Manager'}">Project manager</option>
+                        <option th:value="${'Technician'}">Technicians</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="location" class="control-label">Location <i class="fas fa-globe-asia"></i> </label>
+                    <input id="location" class="form-control" th:field="*{location}" placeholder="Enter Location" />
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="control-label">Work Experience  <i class="fas fa-history"></i></label>
+                    <input class="form-control" id="description" th:field="*{description}" placeholder="Enter work Experience"/>
+                </div>
+        <div class="form-group">
+                    <label for="education" class="control-label">Qualification  <i class="fas fa-graduation-cap"></i></label>
+                    <input id="education" class="form-control" th:field="*{education}" placeholder="Enter Qualification"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Available Time Period in month <i class="fas fa-business-time"></i> </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="startdate" class="control-label">Start date</label>
+                    <input type="date" id="startdate" class="form-control" th:field="*{startDate}" placeholder="Enter Start date"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="enddate" class="control-label">End date</label>
+                    <input type="date"  id="enddate" class="form-control" th:field="*{endDate}" placeholder="Enter end date"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="wage" class="control-label">Expected Salary <i class="fas fa-search-dollar"></i> </label>
+                    <input id="wage" class="form-control" th:field="*{price}" placeholder="Enter Expected Salary (per month)"/>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="col-md-2">
+                <span th:unless="${post_id == null}">
+                    <a type="button" class="btn btn-danger btn-sm" th:href="@{|/delete/post/emp/${post_id}|}" > Delete </a>
+                </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<footer>
+    <p>Copyright © 2021 (19MX218 & 19MX221)</p>
+</footer>
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/main.js}"></script>
+</body>
+</html>

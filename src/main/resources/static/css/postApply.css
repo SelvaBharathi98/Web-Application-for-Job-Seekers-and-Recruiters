@@ -1,0 +1,33 @@
+body{
+    font-family: sans-serif;
+}
+.create-date
+{
+    margin-top: 12px;
+    width: 150px;
+    text-align: center;
+    background-color: blanchedalmond;
+}
+
+.row button{
+    width: 200px;
+}
+.row-apply{
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 2%;
+    margin-top: 3%;
+    font-family: sans-serif, "Arial Rounded MT Bold";
+}
+
+.row-apply h1{
+    font-size: 60px;
+}
+.row-apply h5{
+    font-family: sans-serif;
+    font-size: 19px;
+    color: #353535;
+}
+.cand-date{
+    text-align: right;
+}

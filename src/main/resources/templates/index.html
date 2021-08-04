@@ -1,0 +1,149 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/font-awesome/5.7.2/css/all.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"
+          media="all"  th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/searchForm.css"
+          media="all"  th:href="@{/css/searchForm.css}" />
+    <title>Main </title>
+</head>
+<body>
+<header >
+    <nav class="navbar navbar-fixed-top ">
+        <div class="container">
+            <div class="navbar-header" align="left">
+                <a class="navbar-brand" href="#" th:href="@{/}"><i class="fas fa-wallet" align="left"></i>
+                    <span>JOB APPLICATION</span></a>
+            </div>
+            <div class="navbar-header" align="left">
+                <input id="nav-search" onkeyup="myFunction()" class="form-control input-sm" type="text" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="right">
+                <ul class="nav navbar-nav navbar-right recnavbar" >
+                    <li><a class="active"><i class="fas fa-user-secret"></i> Recruiter</a></li>
+                    <li><a th:href="@{/list/all}"><i class="fas fa-address-book"></i> All </a></li>
+                    <li><a th:href="@{/posts}"> <i class="fas fa-cube"></i> Create </a></li>
+                    <li><a th:href="@{/create/view}"><i class="fas fa-align-justify"></i> Job seeker's application list</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/userSettings}"><i class="fas fa-users-cog"></i>   <span sec:authentication="principal.username">Settings</span></a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</header>
+
+
+<section><br><br>
+    <div class="row" th:fragment="post-list" th:if="${postList != null && !postList.isEmpty()}">
+
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="bg-danger warning no-result"><i class="fa fa-warning"></i> No result</div>
+            <div th:each="p : ${postList}" class="job-list">
+
+                        <a style="text-decoration: none; color: black;" th:href="@{|/list/${p.id}|}">
+                            <div class="list-view">
+                                <span>
+                                    <img th:src="@{${'/uploads/'+ p.imgName}}" th:alt="icon">
+                                </span>
+
+                                <div class="list-info target">
+                                        <h4 th:text="${p.topic}">Topic</h4>
+                                        <p  th:text="${p.description}">Description</p>
+                                        <div class="job-icons">
+                                            <span><i class="fa fa-briefcase"></i> <span th:text="${p.jobType}"></span></span>
+                                            <span><i class="far fa-compass"></i> <span th:text="${p.location}"></span></span>
+                                            <b>Experience : </b><span><i class="fas fa-level-up-alt"></i> <span th:text="${p.experience}"></span></span>
+                                            <span><i class="fas fa-rupee-sign"></i> <span th:text="${p.salary}"></span></span>
+                                            <b>Work period</b><span><i class="fa fa-clock-o"></i> <span th:text="${p.duration}"></span></span>
+                                            <span class="active"><i class="fas fa-user-clock"></i> <span th:text="${p.candidacyList.size()}"></span></span>
+                                            <div class="pull-right btn-wrap">
+                                                <a id="btn-fl" type="button" class="btn btn-danger btn-sm" th:href="@{|/post/close/${p.id}|}" >Close</a>
+                                                <a id="btn-f2" type="button" class="btn btn-warning btn-sm" th:href="@{|/edit/${p.id}|}" > Edit </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </a>
+            </div>
+
+            <div class="row" th:fragment="pagination">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                <a class="page-link" th:href="@{|/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+
+    </div>
+</section>
+
+
+<footer>
+    <div class="para-box2" style="background-color: #303030;">
+        <div class="footer-icons">
+            <ul>
+                <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href="https://github.com/"><i class="fab fa-github-alt"></i></a></li>
+                <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script>
+    function myFunction() {
+        var input = document.getElementById("nav-search");
+        var filter = input.value.toLowerCase();
+        var nodes = document.getElementsByClassName('target');
+
+        var jobCount = 0;
+        for (i = 0; i < nodes.length; i++) {
+            if (nodes[i].innerText.toLowerCase().includes(filter)) {
+               var x = nodes[i].closest(".list-view");
+               x.style.display = "block";
+               jobCount++;
+            } else {
+                var x = nodes[i].closest(".list-view");
+                x.style.display = "none";
+            }
+        }
+        $('.counter').text(jobCount + ' item');
+
+        if(jobCount == '0') {$('.no-result').show();}
+        else {$('.no-result').hide();}
+    }
+</script>
+
+</body>
+</html>

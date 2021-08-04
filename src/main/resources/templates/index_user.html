@@ -1,0 +1,163 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/font-awesome/5.7.2/css/all.css}" />
+
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css"
+          media="all"  th:href="@{/css/index.css}" />
+    <link rel="stylesheet" type="text/css" href="../static/css/searchForm.css"
+          media="all"  th:href="@{/css/searchForm.css}" />
+
+    <title>Main of user </title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{/index_user}"><i class="fas fa-wallet"></i>
+                    <span>JOB APPLICATION</span></a>
+            </div>
+
+            <div class="navbar-header">
+                <input id="nav-search"  onkeyup="myFunction()" class="form-control input-sm " type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div align="right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="active"><i class="fas fa-user-tie"></i> Job Seeker</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/create/postEmp}"><i class="fab fa-studiovinari"></i>   <span sec:authentication="principal.username">Create</span></a>
+                    </li><li class="nav-item">
+                    <a th:unless="${can_serv.getApprovedCount(user.getId().toString())} > 0"><i class="fas fa-user-clock"></i>
+                        <span  class="badge" th:text="${can_serv.getApprovedCount(user.getId().toString())}"></span>
+                    </a>
+                    <a style="color: #3bc28c;" th:if="${can_serv.getApprovedCount(user.getId().toString())} > 0"><i class="fas fa-user-clock"></i>
+                        <span  class="badge" th:text="${can_serv.getApprovedCount(user.getId().toString())}"></span>
+                    </a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/userSettings}"><i class="fas fa-users-cog"></i>   <span sec:authentication="principal.username">User</span></a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"> <i class="fas fa-sign-in-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+<br>
+<div class="row">
+    <ol class="breadcrumb">
+        <li class="active"><a href="/index_user">Data  <i class="fa fa-briefcase"></i></a>  </li>
+        <li><a th:href="@{|/sort/${'fulltime'}|}"><i class="fas fa-sort"></i> Full time</a></li>
+        <li><a th:href="@{|/sort/${'parttime'}|}"><i class="fas fa-sort"></i> Part time</a></li>
+    </ol>
+</div>
+<section>
+    <div class="row" th:fragment="post-list" th:if="${postList != null && !postList.isEmpty()}">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="bg-danger warning no-result"><i class="fa fa-warning"></i> No result</div>
+            <div th:each="p : ${postList}" class="job-list ">
+                <a style="text-decoration: none; color: black;" th:href="@{|/post/view/${p.id}|}">
+                    <div class="list-view">
+                        <div class="in_use_div" >
+                            <div class="row" >
+                                <div class="col-md-2">
+                                <span>
+                                    <img th:src="@{${'/uploads/'+ p.imgName}}" th:alt="icon">
+                                </span>
+                                </div>
+
+                                <div class="col-md-8 target">
+                                    <h4 th:text="${p.topic}">Job Name</h4>
+                                    <p th:text="${p.description}">Description</p>
+                                    <div class="job-icons">
+                                        <i class="fa fa-briefcase"></i> <span th:text="${p.jobType}"></span>
+                                        <i class="far fa-compass"></i> <span th:text="${p.location}"></span>
+                                        <span><i class="fa fa-level-up" aria-hidden="true"></i><b>Experience</b><span th:text="${p.experience}"></span></span>
+                                        <span><i class="fas fa-rupee-sign"></i> <span th:text="${p.salary}"></span></span>
+                                        <span><i class="far fa-clock"></i> <span th:text="${p.duration}"></span></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" align="left">
+                                    <div id="icon-box">
+                                    <span th:if="${can_serv.getState(p.id, user.getId().toString())} == false">
+                                        <span style="color: #c26060;"><i class="fas fa-archive"></i></span>
+                                    </span>
+
+                                        <span th:if="${can_serv.getState(p.id, user.getId().toString())} == true">
+                                            <span class="popuptext" id="myPopup" style="color: #3bc28c;"><i class="fas fa-suitcase" onclick="popFunction()"> <div class="popup" onclick="myFunction()">Approved</div></i></span>
+                                    </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="row" th:fragment="pagination">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <nav aria-label="Pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
+                                <a class="page-link" th:href="@{|/page/${pageNumber}|}" th:text="${pageNumber}">1</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</section>
+
+<footer>
+    <p>Copyright © 2021 (19MX218 & 19MX221)</p>
+</footer>
+
+<script type="text/javascript"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript"
+        th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{../static/js/main.js}"></script>
+<script>
+    function myFunction() {
+        var input = document.getElementById("nav-search");
+        var filter = input.value.toLowerCase();
+        var nodes = document.getElementsByClassName('target');
+        var jobCount = 0;
+        for (i = 0; i < nodes.length; i++) {
+            if (nodes[i].innerText.toLowerCase().includes(filter)) {
+                var x = nodes[i].closest(".list-view");
+                x.style.display = "block";
+                jobCount++;
+            } else {
+                var x = nodes[i].closest(".list-view");
+                x.style.display = "none";
+            }
+        }
+        $('.counter').text(jobCount + ' item');
+        if(jobCount == '0') {$('.no-result').show();}
+        else {$('.no-result').hide();}
+    }
+</script>
+<script>
+    function popFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+</body>
+</html>

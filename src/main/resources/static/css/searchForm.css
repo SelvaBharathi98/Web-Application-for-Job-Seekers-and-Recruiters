@@ -1,0 +1,61 @@
+
+.no-result{
+    display: none;
+}
+.counter{
+    padding:8px;
+    color:#ccc;
+}
+#Search{
+    width: 600px;
+    border: 0;
+    box-shadow: none;
+    color: rgba(102, 103, 109, 0.46);
+    border-bottom: 1px solid rgba(102, 103, 109, 0.46);
+ }
+#Search:hover{
+    border-bottom: 1px solid #303135;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #303135;
+}
+.job-list{
+    margin-top: 10px;
+}
+
+.job-list .list-view{
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 2px;
+    border-bottom: #898d95 1px solid;
+}
+.job-list .list-view:hover{
+    background: #f6f6f6;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.07);
+}
+.job-icons span{
+    padding-right: 9px;
+}
+
+
+.job-list .list-view .list-info {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.list-view span img {
+    display: inline-block;
+    margin: 2px 15px 2px 0;
+    width: 80px;
+    vertical-align: top;
+    border-radius: 1px;
+}
+
+.warning{
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+.btn-wrap{
+    padding-left: 60px;
+}
